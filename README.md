@@ -1,5 +1,5 @@
 # CourtReservations
-Instructions to run:
+Instructions to run
 
 - unzip files
 - cd into folder and 'run npm i'
