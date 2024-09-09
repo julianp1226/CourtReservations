@@ -20,6 +20,26 @@ const isAuth = (session) => {
   return isAuth;
 };
 
+const isAuth3 = (session) => {
+  let isAuth;
+  if (session) {
+    isAuth = true;
+  } else {
+    isAuth = false;
+  }
+  return isAuth;
+};
+
+const isAuth2 = (session) => {
+  let isAuth;
+  if (session) {
+    isAuth = true;
+  } else {
+    isAuth = false;
+  }
+  return isAuth;
+};
+
 const validId = (id, varName) => {
   /*
   Validates and trims an id.
@@ -139,15 +159,14 @@ const validAddress = async (addressLine, city, state, zip/*, key*/) => {
   state = validState(state);
   zip = validZip(zip);
 
-  let address =  addressLine + " " + city + " " + state + " " + zip;
+  let address = addressLine + " " + city + " " + state + " " + zip;
   // console.log(address)
 
   try {
     //console.log("A");
     const result = await geocoder.geocode(address);
     //console.log(result)
-    if (result.length === 0)
-    {
+    if (result.length === 0) {
       // console.log("inner");
       return false;
     }
@@ -167,8 +186,8 @@ const validAddress = async (addressLine, city, state, zip/*, key*/) => {
 
 const validState = (state) => {
   /*
-	Validates a 2 letter state abbreviation and returns it trimmed.
-	*/
+  Validates a 2 letter state abbreviation and returns it trimmed.
+  */
   state = validStr(state, "State"); //check and trim string
   if (state.length != 2) {
     throw `Error: State must be its 2 letter abbreviation.`;
@@ -249,12 +268,12 @@ const validZip = (zip) => {
 
 const validTime = (time, isEndTime) => {
   /*
-	(string, boolean)
-	Verifies the time is a string in HH:MM format (military time)
-	isEndTime boolean -> 24:00 is only valid if it is a closing time or booking end time
-		true if courtClosing time or if endTime
-		false if anything else
-	*/
+  (string, boolean)
+  Verifies the time is a string in HH:MM format (military time)
+  isEndTime boolean -> 24:00 is only valid if it is a closing time or booking end time
+    true if courtClosing time or if endTime
+    false if anything else
+  */
   time = validStr(time, "time");
   let timeArr = time.split(":");
 
@@ -324,10 +343,10 @@ const validTime = (time, isEndTime) => {
 
 const validTimeInRange = (startTime, endTime, courtOpening, courtClosing) => {
   /*
-	valid time format is a string in HH:MM format (military time)
-	startTime, endTime, courtOpening, courtClosing are received as strings in valid time format
-	validTime must be called on these params before calling this function
-	*/
+  valid time format is a string in HH:MM format (military time)
+  startTime, endTime, courtOpening, courtClosing are received as strings in valid time format
+  validTime must be called on these params before calling this function
+  */
 
   let startTimeArr = startTime.split(":");
   let startTimeHourString = startTimeArr[0];
@@ -530,14 +549,14 @@ const militaryToStandard = (militaryTime) => {
   let hours = parseInt(arr[0]);
   let minutes = arr[1];
   let amPm = (hours < 12) ? "AM" : "PM";
-  
+
   if (hours === 0) {
     hours = 12;
-  } 
+  }
   else if (hours > 12) {
     hours -= 12;
   }
-  
+
   let standard = hours + ':' + minutes + ' ' + amPm;
   return standard;
 }
