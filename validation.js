@@ -58,6 +58,10 @@ const validId = (id, varName) => {
   return id;
 };
 
+const fun = () => {
+  return true
+}
+
 const validStr = (str, varName) => {
   /* 
   Validates and trims a string.
